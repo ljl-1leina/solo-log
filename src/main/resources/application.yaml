@@ -1,3 +1,19 @@
 spring:
   application:
     name: solo-log
+  # ==================== MySQL 配置 ====================
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 注意这里的参数：时区、编码、SSL
+    url: jdbc:mysql://localhost:3306/sololog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root      # 改成你本地的MySQL账号
+    password: 123456    # 改成你本地的MySQL密码
+
+  # ==================== Redis 配置 ====================
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      password: 123321        # 如果你本地Redis没设密码，这行就保持注释；有密码就把 # 去掉写在这里
+      timeout: 5000ms
