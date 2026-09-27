@@ -1,4 +1,4 @@
-package com.github.ljl1leina.sololog.Controller;
+package com.github.ljl1leina.sololog.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

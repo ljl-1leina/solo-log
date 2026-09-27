@@ -1,4 +1,4 @@
-package com.github.ljl1leina.sololog.Controller;
+package com.github.ljl1leina.sololog.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
