@@ -1,16 +1,15 @@
 package com.github.ljl1leina.sololog.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.ljl1leina.sololog.common.Result;
 import com.github.ljl1leina.sololog.dto.PostSaveDTO;
 import com.github.ljl1leina.sololog.service.PostService;
+import com.github.ljl1leina.sololog.vo.PostListVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "文章")
 @RestController
@@ -23,5 +22,13 @@ public class PostController {
     @PostMapping
     public Result<Long> create(@Valid @RequestBody PostSaveDTO dto) {
         return Result.ok(postService.create(dto));
+    }
+
+    @Operation(summary = "文章列表（分页，只含已发布）")
+    @GetMapping
+    public Result<IPage<PostListVO>> list(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return Result.ok(postService.listPublished(page, size));
     }
 }
