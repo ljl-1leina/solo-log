@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.ljl1leina.sololog.common.Result;
 import com.github.ljl1leina.sololog.dto.PostSaveDTO;
 import com.github.ljl1leina.sololog.service.PostService;
+import com.github.ljl1leina.sololog.vo.PostDetailVO;
 import com.github.ljl1leina.sololog.vo.PostListVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,5 +31,11 @@ public class PostController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size) {
         return Result.ok(postService.listPublished(page, size));
+    }
+
+    @Operation(summary = "文章详情")
+    @GetMapping("/{id}")
+    public Result<PostDetailVO> detail(@PathVariable Long id) {
+        return Result.ok(postService.getDetail(id));
     }
 }
