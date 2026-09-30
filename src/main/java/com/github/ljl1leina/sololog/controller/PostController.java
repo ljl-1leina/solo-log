@@ -45,4 +45,11 @@ public class PostController {
         postService.update(id, dto);
         return Result.ok();
     }
+
+    @Operation(summary = "删除文章（暂未鉴权）")
+    @DeleteMapping("/{id}")
+    public Result<Void> delete(@PathVariable Long id) {
+        postService.delete(id);
+        return Result.ok();
+    }
 }

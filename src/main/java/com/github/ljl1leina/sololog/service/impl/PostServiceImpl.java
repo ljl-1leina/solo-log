@@ -80,5 +80,14 @@ public class PostServiceImpl implements PostService {
         postMapper.updateById(post);
     }
 
+    @Override
+    public void delete(Long id) {
+        if (postMapper.selectById(id) == null) {
+            throw new BusinessException("文章不存在");
+        }
+        postMapper.deleteById(id);
+        // TODO 第二期考虑：删除文章时是否连带清理它的点赞、评论记录
+    }
+
 
 }

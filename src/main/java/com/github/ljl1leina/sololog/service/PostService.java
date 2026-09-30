@@ -14,4 +14,6 @@ public interface PostService {
     PostDetailVO getDetail(Long id);
 
     void update(Long id, @Valid PostSaveDTO dto);
+
+    void delete(Long id);
 }
