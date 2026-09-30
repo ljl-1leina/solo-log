@@ -68,5 +68,17 @@ public class PostServiceImpl implements PostService {
         return vo;
     }
 
+    @Override
+    public void update(Long id, PostSaveDTO dto) {
+        Post exist = postMapper.selectById(id);
+        if (exist == null) {
+            throw new BusinessException("文章不存在");
+        }
+        Post post = new Post();
+        BeanUtils.copyProperties(dto, post);
+        post.setId(id);
+        postMapper.updateById(post);
+    }
+
 
 }

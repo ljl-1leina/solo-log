@@ -38,4 +38,11 @@ public class PostController {
     public Result<PostDetailVO> detail(@PathVariable Long id) {
         return Result.ok(postService.getDetail(id));
     }
+
+    @Operation(summary = "编辑文章（暂未鉴权）")
+    @PutMapping("/{id}")
+    public Result<Void> update(@PathVariable Long id, @Valid @RequestBody PostSaveDTO dto) {
+        postService.update(id, dto);
+        return Result.ok();
+    }
 }
