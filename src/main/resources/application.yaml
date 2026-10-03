@@ -23,3 +23,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true   # 下划线转驼峰，post_like_count → likeCount
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 控制台打印SQL，学习期必备
+
+jwt:
+  secret: sololog-dev-secret-please-change-to-a-long-random-string
+  expire_hours: 72
