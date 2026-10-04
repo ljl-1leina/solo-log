@@ -40,6 +40,7 @@ public class SecurityConfig {
                                 "/hello/**", "/text/**",
                                 "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**"
                         ).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/posts/likes/**").authenticated()
                         // 游客可读文章
                         .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
                         // 文章的写操作：仅AUTHOR
