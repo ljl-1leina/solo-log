@@ -45,6 +45,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/posts/comments/**").permitAll()   // 已被 GET /api/posts/** 兜住，显式写出意图
                         .requestMatchers(HttpMethod.POST, "/api/posts/comments/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/comments/**").authenticated()
+                        // 我的资料：需登录（是谁由token决定，URL里没有id）
+                        .requestMatchers("/api/me/**").authenticated()
+                        // 头像库列表：放行（注册页等未登录场景也要能看）
+                        .requestMatchers("/api/avatars/**").permitAll()
+                        // 头像静态图片：放行（否则 anyRequest 会把 /avatars/1.png 拦成401）
+                        .requestMatchers("/avatars/**").permitAll()
                         // 游客可读文章
                         .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
                         // 文章的写操作：仅AUTHOR
