@@ -1,6 +1,7 @@
 package com.github.ljl1leina.sololog.common;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class UserContext {
@@ -13,4 +14,19 @@ public class UserContext {
         }
         return (Long) auth.getPrincipal();
     }
+
+    /** 获取当前登录用户角色（USER / AUTHOR），未登录返回null */
+    public static String currentUserRole() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || auth.getPrincipal() == null || "anonymousUser".equals(auth.getPrincipal())) {
+            return null;
+        }
+        return auth.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .filter(s -> s.startsWith("ROLE_"))
+                .map(s -> s.substring(5))
+                .findFirst()
+                .orElse(null);
+    }
+
 }

@@ -41,6 +41,10 @@ public class SecurityConfig {
                                 "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**"
                         ).permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/posts/likes/**").authenticated()
+                        // 评论：看不需要登录，写/删需要
+                        .requestMatchers(HttpMethod.GET, "/api/posts/comments/**").permitAll()   // 已被 GET /api/posts/** 兜住，显式写出意图
+                        .requestMatchers(HttpMethod.POST, "/api/posts/comments/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/comments/**").authenticated()
                         // 游客可读文章
                         .requestMatchers(HttpMethod.GET, "/api/posts/**").permitAll()
                         // 文章的写操作：仅AUTHOR
